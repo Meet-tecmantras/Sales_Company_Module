@@ -1,0 +1,40 @@
+flowchart TD
+    A[Start Automation Process] --> B[Log in to LinkedIn.com]
+    B --> C[Navigate to Custom URL<br/>LinkedIn People Search<br/>with Keywords]
+    C --> D[Scrape People List<br/>Extract 7-10 Profiles<br/>from Search Results]
+    D --> E[Initialize Profile Counter<br/>Counter = 1]
+    E --> F{Counter <= Total Profiles?}
+    F -->|Yes| G[Visit Individual Profile<br/>Profile #Counter]
+    G --> H[Extract Personal Details<br/>- Name<br/>- Title<br/>- Location<br/>- Experience]
+    H --> I[Extract Current Company Info<br/>- Company Name<br/>- Position<br/>- Duration]
+    I --> J{Company LinkedIn Page<br/>Available?}
+    J -->|Yes| K[Visit Company LinkedIn Page]
+    J -->|No| L[Mark Company Info as<br/>Not Available]
+    K --> M[Scrape Company About Section<br/>- Company Description<br/>- Services Offered<br/>- Industry Type<br/>- Company Size]
+    M --> N[Compile Individual Dataset<br/>- Personal Profile Data<br/>- Company Data<br/>- Company About Info]
+    L --> N
+    N --> O[Store Data in Memory<br/>Temporary Dataset]
+    O --> P[Increment Counter<br/>Counter = Counter + 1]
+    P --> Q[Add Delay<br/>Anti-Detection Measure<br/>2-5 seconds]
+    Q --> F
+    F -->|No| R[Compile Complete Dataset<br/>All Profiles + Companies]
+    R --> S[Structure Data for CSV<br/>- Profile Info<br/>- Company Details<br/>- About Section Data]
+    S --> T[Export to CSV File<br/>Save Ideal Client Profile<br/>Database]
+    T --> U[End Process<br/>Automation Complete]
+
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style G fill:#f3e5f5
+    style K fill:#e8f5e8
+    style T fill:#ffebee
+    style U fill:#e1f5fe
+
+    classDef decision fill:#fff9c4,stroke:#f57f17,stroke-width:2px
+    classDef process fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef data fill:#f1f8e9,stroke:#388e3c,stroke-width:2px
+    
+    class F,J decision
+    class H,I,M,N,S process
+    class O,R,T data
